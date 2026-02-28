@@ -1,0 +1,81 @@
+import { Injectable, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { User } from '../models/user.model';
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService  {
+  registeredUsers:any[] = [];
+  currentUser:any;
+ 
+  constructor(private httpClient:HttpClient) {
+ 
+  }
+ 
+  // ngOnInit(): void {
+  //   const localdata=localStorage.getItem('registeredUsers');
+  //   if(localdata != null){
+  //     this.registeredUsers=JSON.parse(localdata);
+ 
+  // }
+ 
+ 
+   public apiUrl = 'https://8080-eebeaebbeccaababacfcbfebecfedabaadcb.premiumproject.examly.io/api'; // Replace with your Spring Boot backend URL
+   
+  public register(user : User) : Observable<any>{
+    console.log(user);
+    return this.httpClient.post(this.apiUrl+"/register",user);
+  }
+ 
+  public login(username : string, password : string,callback : any){
+    let body = {"username":username, "password":password};
+    console.log("Login service : ");
+    console.log(body)
+    this.httpClient.post(this.apiUrl+"/login",body)
+          .subscribe((data : any)=>{
+                                      localStorage.setItem("token",data.token);
+                                      localStorage.setItem("userId",data.userId);
+                                      localStorage.setItem("userRole",data.userRole);
+                                      console.log("Login success")
+                                      callback(true);
+                                    },
+                      (err : any)=>{
+                                      console.log("Invalid credentials.....")
+                                      callback(false);
+                                    });
+  }
+ 
+  public logout(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userRole");
+  }
+ 
+  public get isLoggedIn(){
+    if(localStorage.getItem("token") == null)
+      return false;
+    else
+      return true;
+  }
+ 
+ 
+  public getUserMessage(){
+    this.httpClient.get(this.apiUrl+"/user")
+          .subscribe(data=>{
+            console.log(data)
+          });
+  }
+ 
+  public getAdminMessage(){
+    this.httpClient.get(this.apiUrl+"/admin").subscribe(data=>console.log(data));
+  }
+ 
+  public getWelcomeMessage(){
+    this.httpClient.get(this.apiUrl+"/welcome").subscribe(data=>console.log(data));
+  }
+ 
+ 
+ 
+}

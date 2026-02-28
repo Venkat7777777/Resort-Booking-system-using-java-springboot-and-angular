@@ -1,0 +1,45 @@
+
+<app-customernavbar></app-customernavbar>
+<br>
+<h1>Resort Booking Details</h1>
+<div>
+    <table border="2">
+        <thead>
+                <tr>
+                        
+                        <th>Resort Name</th>
+                        <th>Address</th>
+                        <th>Number of Persons</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+
+                </tr>
+
+        </thead>
+        <tbody>
+
+               <tr  *ngFor="let b of bookings">
+                       <td>{{b.resort.resortName}}</td>
+                       <td>{{b.address}}</td>
+                       <td>{{b.noOfPersons}}</td>
+                       <td>{{b.fromDate}}</td>
+                       <td>{{b.toDate}}</td>
+                       <td>{{b.totalPrice}}</td>
+                       <td>{{b.status}}</td>
+                       <td> <button (click)="deleteBooking(b.bookingId)"  >Delete</button>  </td>
+               </tr>
+        </tbody>
+
+
+
+    </table>
+
+
+
+
+</div>
+<br>
+<app-footer></app-footer>

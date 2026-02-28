@@ -1,0 +1,41 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Resort } from '../models/resort.model';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ResortService {
+
+  //write your own url
+  public apiUrl="https://8080-eebeaebbeccaababacfcbfebecfedabaadcb.premiumproject.examly.io/api/resort";
+
+  constructor(private httpClient:HttpClient) { }
+ 
+  public addResort(resort:Resort):Observable<any>{
+   
+   return this.httpClient.post(this.apiUrl,resort)
+  }
+   
+  public getAllResorts():Observable<any>{
+    return this.httpClient.get(this.apiUrl)
+  }
+ 
+ 
+ 
+  public updateResort(resortId:number,resortDetails:Resort):Observable<any>{
+    return this.httpClient.put(this.apiUrl+"/"+resortId,resortDetails)
+  }
+ 
+  public deleteResort(resortId:number):Observable<any>{
+    return this.httpClient.delete(this.apiUrl+"/"+resortId);
+  }
+ 
+  public getResortById(resortId: number):Observable<any> {
+    return this.httpClient.get(this.apiUrl+"/"+resortId);
+  }
+ 
+}
+ 
+

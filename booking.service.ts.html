@@ -1,0 +1,36 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Booking } from '../models/booking.model';
+import { Observable } from 'rxjs';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BookingService {
+//add your own link
+ public  apiUrl :string ="https://8080-eebeaebbeccaababacfcbfebecfedabaadcb.premiumproject.examly.io/api/booking";
+  constructor(private http:HttpClient) { }
+ 
+  public addBooking(booking : Booking):Observable<any>{
+    return this.http.post(this.apiUrl,booking);
+  }
+  public getAllBookings():Observable<any>{
+    console.log("service");
+    return this.http.get(this.apiUrl)
+  }
+  public getBookingsByUserId():Observable<any>{
+    return this.http.get(`${this.apiUrl}/user/{userId}`)
+  }
+  public updateBooking(booking:Booking):Observable<any>{
+    return this.http.put(this.apiUrl+"/"+booking.bookingId,booking);
+  }
+  public deleteBooking(bookingId:number):Observable<any>{
+  return this.http.delete(this.apiUrl+"/"+bookingId);
+  }
+  public getBookingById(bookingId:number):Observable<any>{
+    return this.http.get(this.apiUrl+"/"+bookingId);
+  }
+}
+ 
+

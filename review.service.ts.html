@@ -1,0 +1,34 @@
+import { Injectable } from '@angular/core';
+import { Review } from '../models/review.model';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReviewService {
+  review : Review[]=[];
+ 
+  public apiUrl = "https://8080-eebeaebbeccaababacfcbfebecfedabaadcb.premiumproject.examly.io/api/review";
+ 
+  constructor(private httpClient:HttpClient) { }
+ 
+  public addReview(review:Review):Observable<any>{
+    console.log("check222")
+    console.log(review)
+    return this.httpClient.post(this.apiUrl,review);
+  }
+ 
+  public getAllReviews():Observable<any>{
+    return this.httpClient.get(this.apiUrl);
+  }
+ 
+  public getReviewsByUserId(userId:number):Observable<any>{
+    return this.httpClient.get(`${this.apiUrl}/user/${userId}`);
+  }
+
+  public getReviewsByresortId(resortId:number):Observable<any>{
+    console.log(resortId);
+    return this.httpClient.get(`${this.apiUrl}/${resortId}`)
+  }
+}

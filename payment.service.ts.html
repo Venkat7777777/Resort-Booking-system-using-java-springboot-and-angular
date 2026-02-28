@@ -1,0 +1,27 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Payment } from '../models/payment.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PaymentService {
+  public  apiUrl :string ="https://8080-eebeaebbeccaababacfcbfebecfedabaadcb.premiumproject.examly.io/api/payment";
+  constructor(private http : HttpClient) { }
+
+  public getPaymentById(id : number):Observable<any> {
+    return this.http.get(this.apiUrl+"/"+id);
+  }
+
+  public getAllPayments():Observable<any> {
+    return this.http.get(this.apiUrl);
+  }
+
+  public addPayment(payment: Payment):Observable<any> {
+    return this.http.post(this.apiUrl,payment);
+  }
+  
+  
+}
+

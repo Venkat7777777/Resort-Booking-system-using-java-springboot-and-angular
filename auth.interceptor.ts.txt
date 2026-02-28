@@ -1,0 +1,57 @@
+import { Injectable } from '@angular/core';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
+ 
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+ 
+  private urlWithoutToken : string[] = [
+    "/api/login",
+    "/api/register",
+    "/api/welcome"
+  ]
+  constructor(private authService: AuthService,private router : Router) {}
+ 
+  public searchUrlWithoutToken(url : string) : boolean{
+    return this.urlWithoutToken.find((el : string)=>url.endsWith(el)) != undefined;
+  }
+ 
+  intercept(req: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>> {
+    let requestUrl: string = req.url;
+ 
+    if(this.searchUrlWithoutToken(requestUrl)){
+      console.log("Requesting without token")
+      return next.handle(req);
+    }
+    else{
+      console.log("Requesting with token");
+      console.log('Token :' + localStorage.getItem('token'));
+      if (localStorage.getItem('token') == null) {
+        // return next.handle(req);
+        this.router.navigate(['/login'])
+      }
+      else {
+        let token = localStorage.getItem("token");
+        console.log("Token sent with request")
+        console.log({ Authorization: `Bearer ${token}` });
+        let modified_req = req.clone({
+         
+          setHeaders: { Authorization : `Bearer ${token}` }
+        });
+        console.log(req.headers);
+        console.log("modified headers")
+        console.log(modified_req);
+        return next.handle(modified_req);
+      }
+    }
+ 
+   
+  }
+}

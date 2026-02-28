@@ -1,0 +1,46 @@
+<app-adminnavbar></app-adminnavbar>
+<br>
+<div class="center">
+    <table border="1.5"class="center">
+        <thead>
+        <tr>
+            <th>Resort Id</th>
+            <th>Resort Name</th>
+            <th>Resort Description</th>
+            <th>Resort Image</th>
+            <th>Resort Available Status</th>
+            <th>Resort Location</th>
+            <th>Capacity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let r of resorts">
+            <td>{{r.resortId}}</td>
+             <td>{{r.resortName}}</td>
+             <td>{{r.description}}</td>
+             <td><img [src]="'assets/'+r.resortImageUrl"></td>
+             <td>{{r.resortAvailableStatus}}</td>
+             <td>{{r.resortLocation}}</td>
+             <td>{{r.capacity}}</td>
+             <td>{{r.price}}</td>
+             <td>
+                <button (click)="onEdit(r.resortId)"> Edit </button>
+                <button (click)="onDelete(r.resortId)"> Delete </button>
+                <button (click)="onReview(r)">Review</button>
+            </td>
+ 
+        </tr>
+        <button (click)="addResort()"> Add New Resort</button>
+ 
+    </tbody>
+ 
+ 
+    </table>
+ 
+ 
+</div>
+
+<br>
+<app-footer></app-footer>
