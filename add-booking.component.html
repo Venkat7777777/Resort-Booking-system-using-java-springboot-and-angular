@@ -1,0 +1,68 @@
+<app-customernavbar></app-customernavbar>
+<br>
+<div class="center" >
+  <h1>Add Booking Detail</h1>
+ 
+  <form [formGroup]="addbookingForm" (ngSubmit)="goToPayment()">
+    <div>
+      <label for="rname">Resort Name</label>
+      <input type="text" id="rname" name="rname" formControlName="rname" >
+    </div>
+    <div>
+      <label for="totalPrice">Total Price</label>
+      <input type="number" id="totalPrice" name="totalPrice" formControlName="totalPrice" >
+    </div>
+    <div>
+      <label for="rlocation">Resort Location</label>
+      <input type="text" id="rlocation" name="rlocation" formControlName="rlocation" >
+     
+    </div>
+    <div>
+      <label for="rcapacity">Resort Capacity</label>
+      <input type="number" id="rcapacity" name="rcapacity" formControlName="rcapacity" >
+     
+    </div>
+    <div>
+      <label for="address">Your Address*</label>
+      <textarea id="address" name="address" formControlName="address"></textarea>
+      <!-- Display error message for address -->
+      <div *ngIf="address.invalid && address.touched" class="error-message">
+        Address is required
+      </div>
+    </div>
+    <div>
+      <label for="noOfPersons">Number of persons</label>
+      <input type="number" id="noOfPersons" name="noOfPersons" formControlName="noOfPersons">
+      <!-- Display error message for number of persons -->
+      <div *ngIf="noOfPersons.invalid && noOfPersons.touched && !noOfPersons.errors?.exceedsCapacity" class="error-message">
+        Number of persons is required
+      </div>
+       <!-- Display error message when number of persons exceeds capacity -->
+       <div *ngIf="noOfPersons.errors?.exceedsCapacity" class="error-message">
+        Number of persons cannot exceed resort capacity
+      </div>
+    </div>
+    <div>
+      <label for="fromDate">From Date*</label>
+      <input type="date" id="fromDate" name="fromDate" formControlName="fromDate">
+      <!-- Display error message for from date -->
+      <div *ngIf="addbookingForm.get('fromDate').invalid && addbookingForm.get('fromDate').touched" class="error-message">
+        From Date is required
+      </div>
+    </div>
+    <div>
+      <label for="toDate">To Date*</label>
+      <input type="date" id="toDate" name="toDate" formControlName="toDate">
+      <!-- Display error message for to date -->
+      <div *ngIf="addbookingForm.get('toDate').invalid && addbookingForm.get('toDate').touched" class="error-message">
+        To Date is required
+      </div>
+    </div>
+    <button type="submit">Make Payment</button>
+    <button>Cancel</button>
+  </form>
+</div>
+
+<br>
+<app-footer></app-footer>
+ 

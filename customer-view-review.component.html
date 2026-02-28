@@ -1,0 +1,29 @@
+<app-customernavbar></app-customernavbar>
+<br>
+
+<h2 style="text-align: center;">Reviews</h2>
+<table border="2.5">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Resort Name</th>
+            <th>Feedback Comment</th>
+            <th>Rating (out of 5)</th>
+            <th>Date Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let review of reviews">
+            <td>{{review.reviewId}}</td>
+            <td>{{review.resort.resortName}}</td>
+            <td>{{review.comment}}</td>
+            <td>{{review.rating}}</td>
+            <td>{{review.dateCreated}}</td>
+        </tr>
+        <button (click)="onAddReview()">add Review</button>
+       
+    </tbody>
+</table>
+<br>
+<app-footer></app-footer>
+  
