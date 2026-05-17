@@ -1,0 +1,40 @@
+<app-adminnavbar></app-adminnavbar>
+<br>
+<div class="center">
+  <form [formGroup]="editForm">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Resort Name</th>
+          <th>Resort Description</th>
+          <th>Resort Image</th>
+          <th>Resort Available Status</th>
+          <th>Resort Location</th>
+          <th>Capacity</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ resort.resortId }}</td>
+          <td><input type="text" formControlName="resortName"></td>
+          <td><input type="text" formControlName="description"></td>
+          <td><input type="text" formControlName="resortImageUrl"></td>
+          <td><input type="text" formControlName="resortAvailableStatus"></td>
+          <td><input type="text" formControlName="resortLocation"></td>
+          <td><input type="number" formControlName="capacity"></td>
+          <td><input type="number" formControlName="price"></td>
+          <td>
+            <button type="button" (click)="saveResort()">Save</button>
+            <button type="button" (click)="cancelEdit()">Cancel</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<br>
+<app-footer></app-footer>

@@ -1,0 +1,5 @@
+.center{ /* overflow: scroll; */
+ height: 500px;
+ width:100%;
+ padding: 5rem;
+}

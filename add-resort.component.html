@@ -1,0 +1,65 @@
+<app-adminnavbar></app-adminnavbar>
+<br>
+<div class="center">
+  <h2>Add New Resort</h2>
+  <form [formGroup]="resortform" (ngSubmit)="addResort()">
+    <div class="form-group">
+      <label for="resortName">Resort Name<span style="color: red">*</span></label>
+      <input type="text" id="resortName" name="resortName" formControlName="resortName">
+      <div *ngIf="resortName.invalid && resortName.touched" class="error-message">
+        Resort Name is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="resortImageUrl">Resort Image</label>
+      <input type="file" id="resortImageUrl" name="resortImageUrl"  formControlName="resortImageUrl">
+      <div *ngIf="resortImageUrl.invalid && resortImageUrl.touched" class="error-message">
+        Please select an image
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="resortLocation">Resort Location<span style="color: red">*</span></label>
+      <input type="text" id="resortLocation" name="resortLocation" formControlName="resortLocation">
+      <div *ngIf="resortLocation.invalid && resortLocation.touched" class="error-message">
+        Resort Location is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Resort Description<span style="color: red">*</span></label>
+      <textarea id="description" name="description" formControlName="description"></textarea>
+      <div *ngIf="description.invalid && description.touched" class="error-message">
+        Description is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="resortAvailableStatus">Resort Available Status<span style="color: red">*</span></label>
+      <select id="resortAvailableStatus" name="resortAvailableStatus" formControlName="resortAvailableStatus">
+        <option value="">Select availability</option>
+        <option value="available">Available</option>
+        <option value="unavailable">Unavailable</option>
+      </select>
+      <div *ngIf="resortAvailableStatus.invalid && resortAvailableStatus.touched" class="error-message">
+        Please select availability
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="price">Price<span style="color: red">*</span></label>
+      <input type="number" id="price" name="price" formControlName="price">
+      <div *ngIf="price.touched &&  price.invalid" class="error-message">
+        Price is required and must be a positive number
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="capacity">Capacity<span style="color: red">*</span></label>
+      <input type="number" id="capacity" name="capacity" formControlName="capacity">
+      <div *ngIf="capacity.invalid && capacity.touched" class="error-message">
+        Capacity is required and must be a positive number
+      </div>
+    </div>
+    <button type="submit">Add Resort</button>
+  </form>
+</div>
+
+<br>
+
+<app-footer></app-footer>

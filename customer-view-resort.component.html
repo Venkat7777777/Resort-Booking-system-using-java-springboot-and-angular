@@ -1,0 +1,46 @@
+<app-customernavbar></app-customernavbar>
+<br>
+<div class="center" >
+
+    <table border="1.5" class="center">
+        <thead>
+        <tr>
+            <th>Resort Name</th>
+            <th>Resort Description</th>
+            <th>Resort Image</th>
+            <th>Resort Available Status</th>
+            <th>Resort Location</th>
+            <th>Capacity</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let r of resorts" >
+             <td>{{r.resortName}}</td>
+             <td>{{r.description}}</td>
+             <td><img [src]="'assets/'+r.resortImageUrl"></td>
+             <td>{{r.resortAvailableStatus}}</td>
+             <td>{{r.resortLocation}}</td>
+             <td>{{r.capacity}}</td>
+             <td>{{r.price}}</td>
+             <td>{{rating}}</td>
+             <td>
+                <button (click)="emitResort(r)">Add Booking </button>
+                <button (click)="onListOfReviews(r)" >Reviews</button>
+             </td>
+             
+        </tr>
+
+
+    </tbody>
+
+
+    </table>
+
+
+</div>
+<br>
+<app-footer></app-footer>
+

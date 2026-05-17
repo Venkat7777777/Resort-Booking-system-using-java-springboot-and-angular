@@ -1,0 +1,48 @@
+
+<app-customernavbar></app-customernavbar>
+<br>
+<h2 style="text-align: center;">Add Review Details</h2>
+<div class="conatiner">
+ 
+    <form [formGroup]="reviewForm" (ngSubmit)="addReview()">
+        <div class="form-group">
+            <label for="username">User Name</label>
+            <input type="text" id="username" name="username" formControlName="username">
+        </div>
+ 
+        <br>
+ 
+        <div class="form-group">
+            <label for="resortname">Resort Name</label>
+            <input type="text" id="resortName" name="resortName" formControlName="resortName" disabled>
+        </div>
+ 
+        <br>
+       
+        <div class="form-group">
+            <label for="comment">Feedback Comment</label>
+            <textarea name="comment" id="comment" cols="30" rows="5" formControlName="comment"></textarea>
+        </div>
+ 
+        <br>
+ 
+        <p>rating<span style="color: red;">*</span></p>
+ 
+        <div class="container" >
+            <input type="radio" class="rating" name="rating"  value="1" id="rating" formControlName="rating"/>
+            <label for="rating">1</label>
+            <input type="radio" class="rating" name="rating" value="2" id="rating">
+            <label for="rating">2</label>
+            <input type="radio" class="rating" name="rating" value="3" id="rating" >
+            <label for="rating">3</label>
+            <input type="radio" class="rating" name="rating" value="4" id="rating"  />
+            <label for="rating">4</label>
+            <div *ngIf="rating.invalid && rating.touched">Rating is required.</div>
+        </div>
+ 
+        <br>
+ 
+        <button type="submit" >Submit</button>
+    </form>
+     <br>  
+<app-footer></app-footer>

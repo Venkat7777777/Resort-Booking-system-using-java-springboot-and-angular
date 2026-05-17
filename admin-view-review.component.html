@@ -1,0 +1,156 @@
+
+admin view review and customer view review.
+
+
+
+css:
+
+/* styles.css */
+
+/* Resetting default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global font and text color */
+body {
+    font-family: Arial, sans-serif;
+    color: #333; /* Dark gray */
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+/* Navbar styling */
+app-adminnavbar {
+    display: block;
+    background-color: #2c3e50; /* Dark blue */
+    color: #fff; /* White text */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Main content styling */
+main {
+    padding: 150px 20px 100px; /* Adjusted for navbar and footer space */
+    text-align: center;
+}
+
+/* Table styling */
+table {
+    width: 80%;
+    margin: 0 auto; /* Center the table */
+    border-collapse: collapse;
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd; /* Light gray border */
+}
+
+thead {
+    background: linear-gradient(to right, #3498db, #5dade2); /* Gradient background */
+    color: #fff; /* White text */
+}
+
+/* Hover effect for table rows */
+tbody tr:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Shining animation for table header */
+thead th {
+    position: relative;
+    animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+    0% {
+        background-position: -100%;
+    }
+    50% {
+        background-position: 200%;
+    }
+    100% {
+        background-position: -100%;
+    }
+}
+
+/* Set width for each table column */
+th:nth-child(1), td:nth-child(1) {
+    width: 15%; /* Adjust width for User Name */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 15%; /* Adjust width for Resort Name */
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 35%; /* Adjust width for Review */
+}
+
+th:nth-child(4), td:nth-child(4) {
+    width: 15%; /* Adjust width for Ratings */
+}
+
+th:nth-child(5), td:nth-child(5) {
+    width: 20%; /* Adjust width for Date Created */
+}
+
+/* Footer styling */
+app-footer {
+    display: block;
+    background-color: #2c3e50; /* Dark blue */
+    color: #fff; /* White text */
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Adjustments for space above navbar and below footer */
+br + app-adminnavbar {
+    margin-top: 20px;
+}
+
+app-footer + br {
+    margin-bottom: 20px;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+js:
+
+// Write JavaScript here
+<!-- Include jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Add JavaScript code -->
+<script>
+    $(document).ready(function() {
+        $('.review-cell').hover(function() {
+            var reviewText = $(this).text();
+            $('<div class="popup">' + reviewText + '</div>').appendTo('body').fadeIn();
+        }, function() {
+            $('.popup').remove();
+        });
+    });
+</script>

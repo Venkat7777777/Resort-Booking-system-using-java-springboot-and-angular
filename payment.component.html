@@ -1,0 +1,33 @@
+<app-customernavbar></app-customernavbar>
+<br>
+<div class="center">
+    <h2>Payment Details</h2>
+    <form [formGroup]="paymentForm" (ngSubmit)="completeprocess()">
+      <div>
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" formControlName="cardNumber" required>
+        <div *ngIf="paymentForm.get('cardNumber').invalid && paymentForm.get('cardNumber').touched" class="error-message">
+          Card Number is required
+        </div>
+      </div>
+      <div>
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" id="expiryDate" formControlName="expiryDate" required>
+        <div *ngIf="paymentForm.get('expiryDate').invalid && paymentForm.get('expiryDate').touched" class="error-message">
+          Expiry Date is required
+        </div>
+      </div>
+      <div>
+        <label for="cvv">CVV:</label>
+        <input type="password" id="cvv" formControlName="cvv" required>
+        <div *ngIf="paymentForm.get('cvv').invalid && paymentForm.get('cvv').touched" class="error-message">
+          CVV is required
+        </div>
+      </div>
+      <button  type="submit">Confirm Payment</button>
+      <button >cancel </button>
+    </form>
+  </div>
+<br>
+<footer></footer>
+
